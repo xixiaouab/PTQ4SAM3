@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PTQ4SAM3</title>
+    <meta
+      name="description"
+      content="Semantics-preserving post-training quantization for Segment Anything Model 3."
+    />
+    <meta property="og:title" content="PTQ4SAM3" />
+    <meta
+      property="og:description"
+      content="PTQ4SAM3 preserves prompt-conditioned semantics during low-bit post-training quantization, keeping SAM3 accurate, compact, and fast across image and video segmentation."
+    />
+    <meta property="og:url" content="https://xixiaouab.github.io/PTQ4SAM3/" />
+    <meta property="og:image" content="https://xixiaouab.github.io/PTQ4SAM3/assets/images/teaser.webp" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="PTQ4SAM3" />
+    <meta
+      name="twitter:description"
+      content="PTQ4SAM3 preserves prompt-conditioned semantics during low-bit post-training quantization, keeping SAM3 accurate, compact, and fast across image and video segmentation."
+    />
+    <meta name="twitter:image" content="https://xixiaouab.github.io/PTQ4SAM3/assets/images/teaser.webp" />
+    <meta name="citation_title" content="PTQ4SAM3: Semantics-Preserving Post-Training Quantization for Segment Anything Model 3" />
+    <meta name="citation_author" content="Xiao, Xi" />
+    <meta name="citation_author" content="Zhang, Yunbei" />
+    <meta name="citation_author" content="Zhao, Lin" />
+    <meta name="citation_author" content="Wang, Janet" />
+    <meta name="citation_author" content="Li, Yanshu" />
+    <meta name="citation_author" content="Ma, Chenrui" />
+    <meta name="citation_author" content="Wang, Pan" />
+    <meta name="citation_author" content="Li, Yuqi" />
+    <meta name="citation_author" content="Li, Fuchen" />
+    <meta name="citation_author" content="Wang, Tianyang" />
+    <meta name="citation_author" content="Wang, Xiao" />
+    <meta name="citation_publication_date" content="2026" />
+    <meta name="citation_abstract_html_url" content="https://xixiaouab.github.io/PTQ4SAM3/" />
+    <meta name="citation_fulltext_html_url" content="https://xixiaouab.github.io/PTQ4SAM3/" />
+    <meta name="citation_keywords" content="post-training quantization; Segment Anything Model; semantic segmentation; video segmentation; vision foundation models" />
+    <link rel="canonical" href="https://xixiaouab.github.io/PTQ4SAM3/" />
+    <meta name="theme-color" content="#dceeff" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Serif:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/styles.css?v=4a11d5c" />
+  </head>
+  <body>
+    <main id="top">
+      <section class="hero">
+        <div class="hero-inner">
+          <h1>
+            <span>PTQ4SAM3</span>: Semantics-Preserving Post-Training Quantization for Segment Anything Model 3
+          </h1>
+          <p class="subtitle">
+            PTQ4SAM3 preserves prompt-conditioned semantics during low-bit post-training quantization, keeping SAM3 accurate, compact, and fast across image and video segmentation.
+          </p>
+
+          <div class="authors" aria-label="Authors">
+            <p class="author-list">
+              <span class="author-line">
+                <a href="https://xixiaouab.github.io/" target="_blank" rel="noopener">Xi&nbsp;Xiao</a><sup>1</sup>,
+                <a href="https://yunbeizhang.github.io/" target="_blank" rel="noopener">Yunbei&nbsp;Zhang</a><sup>2</sup>,
+                <a href="https://lin-zhao-resolve.github.io/" target="_blank" rel="noopener">Lin&nbsp;Zhao</a><sup>3</sup>,
+                <a href="https://janetwang.github.io/" target="_blank" rel="noopener">Janet&nbsp;Wang</a><sup>2</sup>,
+                <a href="https://openreview.net/search?term=Yanshu%20Li" target="_blank" rel="noopener">Yanshu&nbsp;Li</a><sup>4</sup>,
+              </span>
+              <span class="author-line">
+                <a href="https://openreview.net/search?term=Chenrui%20Ma" target="_blank" rel="noopener">Chenrui&nbsp;Ma</a><sup>7</sup>,
+                <a href="https://openreview.net/search?term=Pan%20Wang" target="_blank" rel="noopener">Pan&nbsp;Wang</a><sup>5</sup>,
+                <a href="https://openreview.net/search?term=Yuqi%20Li" target="_blank" rel="noopener">Yuqi&nbsp;Li</a><sup>6</sup>,
+                <a href="https://openreview.net/search?term=Fuchen%20Li" target="_blank" rel="noopener">Fuchen&nbsp;Li</a><sup>1</sup>,
+                <a href="https://wangt0716.github.io/index.html" target="_blank" rel="noopener">Tianyang&nbsp;Wang</a><sup>1</sup>,
+                <a href="https://openreview.net/profile?id=~Xiao_Wang21" target="_blank" rel="noopener">Xiao&nbsp;Wang</a><sup>7</sup>
+              </span>
+            </p>
+            <p class="affiliations">
+              <sup>1</sup>University of Alabama at Birmingham &middot;
+              <sup>2</sup>Tulane University &middot;
+              <sup>3</sup>Northeastern University &middot;
+              <sup>4</sup>Brown University &middot;
+              <sup>5</sup>University of Pittsburgh &middot;
+              <sup>6</sup>SUNY Buffalo &middot;
+              <sup>7</sup>Oak Ridge National Laboratory
+            </p>
+          </div>
+
+          <div class="button-row" aria-label="Project links">
+            <a class="button button-disabled" aria-disabled="true" title="Paper PDF coming soon">
+              <span class="button-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Zm8 1.5V8h4.5L14 3.5ZM8 12h3a2.5 2.5 0 0 1 0 5H9v2H8v-7Zm1 1v3h2a1.5 1.5 0 0 0 0-3H9Zm6 0h1.6c1.9 0 3.2 1.2 3.2 3s-1.3 3-3.2 3H15v-6Zm1 1v4h.6c1.3 0 2.1-.8 2.1-2s-.8-2-2.1-2H16Z"/></svg>
+              </span>
+              <span>Paper coming soon</span>
+            </a>
+            <a class="button button-disabled" aria-disabled="true" title="Code release coming soon">
+              <span class="button-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="m8.7 16.6-5-4.6 5-4.6 1.3 1.4L6.5 12l3.5 3.2-1.3 1.4Zm6.6 0L14 15.2l3.5-3.2L14 8.8l1.3-1.4 5 4.6-5 4.6ZM11.1 19l-1.9-.6L12.9 5l1.9.6L11.1 19Z"/></svg>
+              </span>
+              <span>Code coming soon</span>
+            </a>
+            <a class="button" href="https://github.com/xixiaouab/PTQ4SAM3" target="_blank" rel="noopener">
+              <span class="button-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M12 .8A11.2 11.2 0 0 0 .8 12c0 5 3.3 9.2 7.8 10.7.6.1.8-.2.8-.6v-2.1c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.2-1.7-1.2-1.7-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 1.7 2.7 1.2 3.3.9.1-.7.4-1.2.7-1.5-2.5-.3-5.2-1.3-5.2-5.6 0-1.2.4-2.3 1.2-3.1-.1-.3-.5-1.5.1-3 0 0 1-.3 3.2 1.2.9-.3 1.9-.4 2.9-.4s2 .1 2.9.4c2.2-1.5 3.2-1.2 3.2-1.2.6 1.5.2 2.7.1 3 .7.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.3-5.2 5.6.4.3.8 1 .8 2.1v3.2c0 .4.2.7.8.6A11.2 11.2 0 0 0 23.2 12 11.2 11.2 0 0 0 12 .8Z"/></svg>
+              </span>
+              <span>GitHub</span>
+            </a>
+            <a class="button" href="#citation">
+              <span class="button-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M7 4h11v3H9v3h8v3H9v4h9v3H7V4ZM4 4h2v16H4V4Z"/></svg>
+              </span>
+              <span>BibTeX</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="teaser-section" aria-labelledby="teaser-title">
+        <div class="container">
+          <figure class="teaser">
+            <img
+              src="assets/images/teaser.webp"
+              alt="Overview of PTQ4SAM3 for semantics-preserving post-training quantization of SAM3."
+            />
+            <figcaption id="teaser-title">
+              PTQ4SAM3 diagnoses semantic concept drift under low-bit quantization and restores prompt-conditioned segmentation behavior through semantic anchors, orthogonal rectification, and temporal alignment.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section id="abstract" class="section">
+        <div class="container text-grid">
+          <div>
+            <p class="section-kicker">Abstract</p>
+            <h2>Quantizing SAM3 is hard because semantics drift before masks fail.</h2>
+          </div>
+          <div class="prose">
+            <p>Segment Anything Model 3 extends promptable segmentation to image and video settings, but direct post-training quantization can severely distort the semantic pathways that connect prompts, object queries, and masks.</p>
+            <p>PTQ4SAM3 introduces a semantics-preserving quantization framework tailored to SAM3. It uses semantic-anchor calibration, orthogonal subspace rectification, and temporal distribution alignment to correct concept drift without retraining the full model.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-soft">
+        <div class="container">
+          <div class="section-heading">
+            <p class="section-kicker">Three claims</p>
+            <h2>What this paper changes</h2>
+          </div>
+          <div class="claim-grid">
+            <article class="claim-card">
+              <span class="claim-index">01</span>
+              <h3>Semantic drift is the bottleneck.</h3>
+              <p>Low-bit perturbations do not merely add numerical noise; they shift the prompt-conditioned semantic representation that SAM3 relies on for object localization.</p>
+            </article>
+            <article class="claim-card">
+              <span class="claim-index">02</span>
+              <h3>Calibration should be prompt aware.</h3>
+              <p>Semantic anchors provide task-aligned calibration signals, preserving the relation between visual tokens, prompt embeddings, and mask predictions.</p>
+            </article>
+            <article class="claim-card">
+              <span class="claim-index">03</span>
+              <h3>Video needs temporal stability.</h3>
+              <p>Temporal distribution alignment keeps quantized representations consistent across frames, avoiding flicker while retaining compression and speed benefits.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="method" class="section">
+        <div class="container">
+          <div class="section-heading">
+            <p class="section-kicker">Method</p>
+            <h2>Preserving SAM3 semantics through quantization-aware alignment</h2>
+          </div>
+
+          <div class="method-flow" aria-label="Method steps">
+            <article>
+              <h3>Semantic anchors</h3>
+              <p>Representative prompt-object pairs calibrate activation ranges around the semantic subspaces that matter for segmentation.</p>
+            </article>
+            <article>
+              <h3>Orthogonal rectification</h3>
+              <p>Quantization error is decomposed and corrected away from the semantic anchor direction, reducing destructive drift.</p>
+            </article>
+            <article>
+              <h3>Temporal alignment</h3>
+              <p>Video-frame distributions are aligned so the quantized model stays coherent across time as well as across prompts.</p>
+            </article>
+          </div>
+
+          <figure class="wide-figure">
+            <img
+              src="assets/images/method.webp"
+              alt="Preserving SAM3 semantics through quantization-aware alignment"
+            />
+            <figcaption>
+              PTQ4SAM3 turns post-training quantization into a semantic preservation problem: it calibrates around anchor concepts, rectifies orthogonal distortion, and aligns video distributions.
+            </figcaption>
+          </figure>
+
+          <div class="equation-panel">
+            <p class="equation-label">Semantic Preservation Objective</p>
+            <p class="equation">
+              minimize semantic drift while enforcing W4A8 quantization constraints
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="results" class="section section-soft">
+        <div class="container">
+          <div class="section-heading">
+            <p class="section-kicker">Results</p>
+            <h2>Near-lossless W4A8 segmentation with real efficiency gains</h2>
+          </div>
+
+          <div class="metric-grid">
+            <article class="metric-card">
+              <strong>72.5</strong>
+              <span>RefCOCO Pr@0.5 at W4A8, compared with 42.1 for PTQ4SAM</span>
+            </article>
+            <article class="metric-card">
+              <strong>80.1</strong>
+              <span>SA-V frame mIoU at W4A8 with 95.9% temporal consistency</span>
+            </article>
+            <article class="metric-card">
+              <strong>3.5x</strong>
+              <span>Model compression from low-bit post-training quantization</span>
+            </article>
+            <article class="metric-card">
+              <strong>54.9 FPS</strong>
+              <span>Reported throughput with 18.2 ms per frame</span>
+            </article>
+          </div>
+
+          <div class="figure-grid">
+            <figure class="wide-figure">
+              <img
+                src="assets/images/results-ablation.webp"
+                alt="Qualitative quantization comparison for PTQ4SAM3."
+              />
+              <figcaption>
+                PTQ4SAM3 retains fine object structure under aggressive W4A8 quantization, where prior PTQ methods lose prompt-specific mask details.
+              </figcaption>
+            </figure>
+            <figure class="wide-figure">
+              <img
+                src="assets/images/case-study.webp"
+                alt="Temporal examples and segmentation comparisons for PTQ4SAM3."
+              />
+              <figcaption>
+                Across video frames, temporal distribution alignment reduces flicker and keeps object masks stable.
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container split-panel">
+          <div>
+            <p class="section-kicker">Why it matters</p>
+            <h2>Compression should not erase prompt-conditioned meaning.</h2>
+          </div>
+          <div class="prose">
+            <p>For foundation segmentation models, the expensive parts of inference are also the parts that carry semantics. Treating quantization as uniform numerical approximation can miss the representation drift that actually changes masks.</p>
+            <p>PTQ4SAM3 keeps the post-training workflow practical while making the calibration signal respect prompts, objects, and temporal consistency.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="citation" class="section section-soft">
+        <div class="container">
+          <div class="section-heading">
+            <p class="section-kicker">Citation</p>
+            <h2>Cite PTQ4SAM3</h2>
+            <p class="section-note">
+              If our work is helpful to your research, please consider citing PTQ4SAM3. Thank you.
+            </p>
+          </div>
+          <div class="bibtex-card">
+            <button class="copy-button" type="button" data-copy-bib>
+              Copy BibTeX
+            </button>
+            <pre><code id="bibtex">@misc{xiao2026ptq4sam3,
+  title        = {PTQ4SAM3: Semantics-Preserving Post-Training Quantization for Segment Anything Model 3},
+  author       = {Xi Xiao and Yunbei Zhang and Lin Zhao and Janet Wang and Yanshu Li and Chenrui Ma and Pan Wang and Yuqi Li and Fuchen Li and Tianyang Wang and Xiao Wang},
+  year         = {2026},
+  note         = {Project page: https://xixiaouab.github.io/PTQ4SAM3/}
+}</code></pre>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-inner footer-note">
+        <p>
+          Companion page to the PTQ4SAM3 paper. The project repository lives at
+          <a href="https://github.com/xixiaouab/PTQ4SAM3" target="_blank" rel="noopener">PTQ4SAM3</a>;
+          contributions are welcome. Layout follows common academic project-page
+          conventions, inspired by the
+          <a href="https://github.com/nerfies/nerfies.github.io" target="_blank" rel="noopener">Nerfies</a>
+          template. Page content released under
+          <a href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.
+        </p>
+        <a href="#top">Back to top</a>
+      </div>
+    </footer>
+
+    <script src="assets/site.js?v=6b4a7c1"></script>
+  </body>
+</html>
